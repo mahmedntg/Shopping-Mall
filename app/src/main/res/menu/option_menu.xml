@@ -1,0 +1,16 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/signOutItemMenu"
+        android:icon="@drawable/ic_action_logout"
+        android:title="Sign Out"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/addEventItemMenu"
+        android:icon="@drawable/ic_action_logout"
+        android:title="Add Event"
+        app:showAsAction="withText" />
+
+</menu>
