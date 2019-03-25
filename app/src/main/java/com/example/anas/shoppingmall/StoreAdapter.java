@@ -1,4 +1,4 @@
-package com.example.mhamedsayed.shoppingmall;
+package com.example.anas.shoppingmall;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.mhamedsayed.shoppingmall.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

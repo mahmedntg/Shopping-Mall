@@ -1,4 +1,4 @@
-package com.example.mhamedsayed.shoppingmall;
+package com.example.anas.shoppingmall;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;

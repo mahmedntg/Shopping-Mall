@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.mhamedsayed.shoppingmall">
+    package="com.example.anas.shoppingmall">
 
     <application
         android:allowBackup="true"
@@ -10,20 +10,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".SplashActivity">
-       <!--     <intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+            </intent-filter>
         </activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".StoreActivity">
-              <intent-filter>
+        <!--      <intent-filter>
                   <action android:name="android.intent.action.MAIN" />
 
                   <category android:name="android.intent.category.LAUNCHER" />
-              </intent-filter>
+              </intent-filter>-->
         </activity>
         <activity android:name=".AddStoreActivity" />
         <activity android:name=".StoreDetailsActivity" />

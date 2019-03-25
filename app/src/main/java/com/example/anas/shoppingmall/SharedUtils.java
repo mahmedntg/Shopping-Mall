@@ -1,4 +1,4 @@
-package com.example.mhamedsayed.shoppingmall;
+package com.example.anas.shoppingmall;
 
 /**
  * Created by mhamedsayed on 3/16/2019.

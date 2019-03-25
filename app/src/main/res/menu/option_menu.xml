@@ -3,14 +3,16 @@
 
     <item
         android:id="@+id/signOutItemMenu"
-        android:icon="@drawable/ic_action_logout"
         android:title="Sign Out"
-        app:showAsAction="always" />
+        app:showAsAction="withText" />
 
     <item
         android:id="@+id/addEventItemMenu"
-        android:icon="@drawable/ic_action_logout"
         android:title="Add Event"
         app:showAsAction="withText" />
 
+    <item
+        android:id="@+id/openLocationItemMenu"
+        android:title="Open Mall Location"
+        app:showAsAction="withText" />
 </menu>

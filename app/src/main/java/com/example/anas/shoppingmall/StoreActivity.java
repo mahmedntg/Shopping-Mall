@@ -1,4 +1,4 @@
-package com.example.mhamedsayed.shoppingmall;
+package com.example.anas.shoppingmall;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -35,6 +35,7 @@ import java.util.ArrayList;
 public class StoreActivity extends AppCompatActivity {
     ArrayList<Store> storeList;
     private DatabaseReference databaseReference;
+    private FirebaseDatabase database;
     private FirebaseAuth firebaseAuth;
     private StoreAdapter mAdapter;
     private ProgressDialog progressDialog;
@@ -50,7 +51,8 @@ public class StoreActivity extends AppCompatActivity {
         progressDialog.setMessage("Loading...");
         progressDialog.setCancelable(false);
         progressDialog.show();
-        databaseReference = FirebaseDatabase.getInstance().getReference("store");
+        database=FirebaseDatabase.getInstance();
+        databaseReference = database.getReference("store");
         storeList = new ArrayList<>();
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.myRecyclerView);
         recyclerView.setHasFixedSize(true);
@@ -123,6 +125,20 @@ public class StoreActivity extends AppCompatActivity {
                 return true;
             case R.id.addEventItemMenu:
                 startActivity(new Intent(this, AddEventActivity.class));
+                return true;
+
+            case R.id.openLocationItemMenu:
+                database.getReference("mall").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        startActivity(new Intent(this, AddEventActivity.class));
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

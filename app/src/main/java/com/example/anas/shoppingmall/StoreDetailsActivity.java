@@ -1,4 +1,4 @@
-package com.example.mhamedsayed.shoppingmall;
+package com.example.anas.shoppingmall;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
@@ -58,10 +58,10 @@ public class StoreDetailsActivity extends AppCompatActivity implements View.OnCl
         openTimeTV.setText("Opening At: " + store.getOpenTime());
         closeTimeTV.setText("Closing At: " + store.getCloseTime());
         descriptionTV.setText(store.getDescription());
-        if (!TextUtils.isEmpty(store.getSaleFromDate()))
+        if (!TextUtils.isEmpty(store.getSaleFromDate()) || !TextUtils.isEmpty(store.getSaleToDate())) {
             saleFromDateTV.setText("Sale From: " + store.getSaleFromDate());
-        if (!TextUtils.isEmpty(store.getSaleToDate()))
             saleToDateTV.setText("Sale To: " + store.getSaleToDate());
+        }
         Picasso.with(this).load(store.getImage()).into(imageView);
         progressDialog.hide();
         String email = firebaseAuth.getCurrentUser().getEmail();
@@ -77,6 +77,9 @@ public class StoreDetailsActivity extends AppCompatActivity implements View.OnCl
             saleFromDateTV.setOnClickListener(this);
             saleToDateTV.setClickable(true);
             saleToDateTV.setOnClickListener(this);
+        } else if (TextUtils.isEmpty(store.getSaleFromDate()) || TextUtils.isEmpty(store.getSaleToDate())) {
+            saleFromDateTV.setVisibility(View.GONE);
+            saleToDateTV.setVisibility(View.GONE);
         }
     }
 

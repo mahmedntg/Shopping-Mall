@@ -7,7 +7,7 @@
     android:background="@color/white"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context="com.example.mhamedsayed.shoppingmall.LoginActivity">
+    tools:context="com.example.anas.shoppingmall.LoginActivity">
 
     <com.alexzh.circleimageview.CircleImageView
         android:layout_width="100dp"
