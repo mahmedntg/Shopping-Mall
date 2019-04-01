@@ -21,32 +21,21 @@
             "package_name": "com.example.mhamedsayed.shoppingmall",
             "certificate_hash": "102c5c0adbd905ce6ad2cbdedfb6175e92b4be48"
           }
-        },
-        {
-          "client_id": "449966102261-bugqil4tk8cen5c84qefi2vekbrjfd5r.apps.googleusercontent.com",
-          "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDZORk3x0O5kXj50NaTZ-B9mjg6_4qjVyM"
+          "current_key": "AIzaSyAsuarkcnIMUIZLo68c22pKU76N7s1OL1A"
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
               "client_id": "449966102261-bugqil4tk8cen5c84qefi2vekbrjfd5r.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
         }
       }
     }

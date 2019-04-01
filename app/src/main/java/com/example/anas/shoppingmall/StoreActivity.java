@@ -1,8 +1,8 @@
 package com.example.anas.shoppingmall;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,19 +16,19 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.example.anas.shoppingmall.utils.Mall;
+import com.example.anas.shoppingmall.utils.notificationcall.Controller;
+import com.example.anas.shoppingmall.utils.notificationcall.Notification;
+import com.example.anas.shoppingmall.utils.notificationcall.NotificationRequest;
+import com.example.anas.shoppingmall.utils.Store;
+import com.example.anas.shoppingmall.utils.StoreAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -51,7 +51,7 @@ public class StoreActivity extends AppCompatActivity {
         progressDialog.setMessage("Loading...");
         progressDialog.setCancelable(false);
         progressDialog.show();
-        database=FirebaseDatabase.getInstance();
+        database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference("store");
         storeList = new ArrayList<>();
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.myRecyclerView);
@@ -76,6 +76,7 @@ public class StoreActivity extends AppCompatActivity {
             }
         });
     }
+
 
     @Override
     protected void onResume() {
@@ -131,7 +132,8 @@ public class StoreActivity extends AppCompatActivity {
                 database.getReference("mall").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        startActivity(new Intent(this, AddEventActivity.class));
+                        Mall mall = dataSnapshot.getValue(Mall.class);
+                        openLocation(mall.getLatitude(), mall.getLongitude(), mall.getName());
                     }
 
                     @Override
@@ -143,5 +145,14 @@ public class StoreActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void openLocation(double latitude, double longitude, String name) {
+        String strUri = "http://maps.google.com/maps?q=loc:" + latitude + "," + longitude + " (" + name + ")";
+        Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(strUri));
+
+        intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+
+        startActivity(intent);
     }
 }

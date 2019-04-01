@@ -1,4 +1,4 @@
-package com.example.anas.shoppingmall;
+package com.example.anas.shoppingmall.utils;
 
 import java.io.Serializable;
 
