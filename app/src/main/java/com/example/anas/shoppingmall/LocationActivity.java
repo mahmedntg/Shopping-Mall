@@ -12,13 +12,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.Toast;
 
-import com.example.anas.shoppingmall.utils.LocationAdapter;
-import com.example.anas.shoppingmall.utils.LocationModel;
-import com.example.anas.shoppingmall.utils.Store;
-import com.example.anas.shoppingmall.utils.StoreAdapter;
+import com.example.anas.shoppingmall.utillity.LocationAdapter;
+import com.example.anas.shoppingmall.utillity.LocationModel;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,7 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LocationActivity extends AppCompatActivity {
+public class LocationActivity extends BaseActivity {
     private static final String TAG = "LocationActivity";
     private FirebaseDatabase database;
     private FirebaseAuth firebaseAuth;
@@ -40,13 +39,14 @@ public class LocationActivity extends AppCompatActivity {
     private List<LocationModel> locationModels;
     DatabaseReference databaseReference;
     private static final int ERROR_DIALOG_REQUEST = 9001;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
-        if (isServicesOK()) {
-            init();
+        if (!isServicesOK()) {
+            return;
         }
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -57,7 +57,7 @@ public class LocationActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference("user_location");
         locationModels = new ArrayList<>();
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.myRecyclerView);
+        recyclerView = (RecyclerView) findViewById(R.id.myRecyclerView);
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -65,6 +65,26 @@ public class LocationActivity extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         mAdapter = new LocationAdapter(locationModels, this);
         recyclerView.setAdapter(mAdapter);
+        displayMenu(R.id.viewStore);
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LocationActivity.this, AddMapActivity.class);
+                startActivity(intent);
+            }
+        });
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy > 0 && fab.getVisibility() == View.VISIBLE) {
+                    fab.hide();
+                } else if (dy < 0 && fab.getVisibility() != View.VISIBLE) {
+                    fab.show();
+                }
+            }
+        });
     }
 
     @Override
@@ -82,7 +102,11 @@ public class LocationActivity extends AppCompatActivity {
                             locationModels.add(locationModel);
 
                         }
+                        final LayoutAnimationController controller =
+                                AnimationUtils.loadLayoutAnimation(getApplicationContext(), R.anim.layout_animation_fall_down);
+                        recyclerView.setLayoutAnimation(controller);
                         mAdapter.notifyDataSetChanged();
+                        recyclerView.scheduleLayoutAnimation();
                         progressDialog.hide();
                     }
 
@@ -94,16 +118,6 @@ public class LocationActivity extends AppCompatActivity {
                 });
     }
 
-    private void init() {
-        FloatingActionButton btnMap = findViewById(R.id.fab);
-        btnMap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LocationActivity.this, AddMapActivity.class);
-                startActivity(intent);
-            }
-        });
-    }
 
     public boolean isServicesOK() {
         Log.d(TAG, "isServicesOK: checking google services version");
@@ -130,4 +144,12 @@ public class LocationActivity extends AppCompatActivity {
         locationModels.remove(position);
         mAdapter.notifyDataSetChanged();
     }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.cancel();
+        }
+    }
+
 }

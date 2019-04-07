@@ -8,13 +8,14 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.anas.shoppingmall.utils.SharedUtils;
-import com.example.anas.shoppingmall.utils.Store;
-import com.example.anas.shoppingmall.utils.notificationcall.Controller;
+import com.example.anas.shoppingmall.utillity.SharedUtils;
+import com.example.anas.shoppingmall.utillity.Store;
+import com.example.anas.shoppingmall.utillity.notificationcall.Controller;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -27,7 +28,7 @@ import java.util.Map;
 public class StoreDetailsActivity extends AppCompatActivity implements View.OnClickListener {
     private ImageView imageView;
     private TextView openTimeTV, closeTimeTV, descriptionTV, saleFromDateTV, saleToDateTV;
-    private CardView addSaledBTN;
+    private Button addSaledBTN;
     private FirebaseAuth firebaseAuth;
     private ProgressDialog progressDialog;
     int fromYear, fromMonth, fromDay;
@@ -143,5 +144,14 @@ public class StoreDetailsActivity extends AppCompatActivity implements View.OnCl
                 = new Controller();
         controller.sendAllNotification("", "New Sale", "Sale in " + store.getName() + " From: " + saleFromDateTV.getText().toString() + " To: " + saleToDateTV.getText().toString());
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.cancel();
+        }
+    }
+
 
 }

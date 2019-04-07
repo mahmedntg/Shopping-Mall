@@ -14,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:layoutAnimation="@anim/layout_animation_fall_down"
         android:scrollbars="vertical"></android.support.v7.widget.RecyclerView>
 
     <TextView

@@ -1,160 +1,172 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context="com.example.anas.shoppingmall.AddStoreActivity">
+    tools:context=".AddStoreActivity">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <android.support.v7.widget.CardView
-            android:layout_width="300dp"
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/teabackground">
+
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha=".4"
+            android:background="@drawable/background_fade">
+
+        </FrameLayout>
+
+
+        <ScrollView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            app:cardBackgroundColor="@color/bg_gray"
-            app:cardCornerRadius="5dp"
-            app:cardElevation="3dp">
+            android:layout_centerInParent="true">
 
-            <ImageButton
-                android:id="@+id/storeImageBtn"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_margin="10dp"
-                android:background="@color/bg_gray"
-                android:gravity="center|start"
-                android:onClick="imageBtnClicked" />
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_left_16"
+                android:layout_marginTop="@dimen/margin_top_16"
+                android:layout_marginRight="@dimen/margin_right_16"
+                android:layout_marginBottom="@dimen/margin_bottom_16"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/padding_20">
 
-        </android.support.v7.widget.CardView>
+                <ImageButton
+
+                    android:id="@+id/storeImageBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="140dp"
+                    android:layout_margin="10dp"
+                    android:scaleType="fitXY"
+                    android:background="@mipmap/gallery"
+                    android:gravity="center|start"
+                    android:onClick="imageBtnClicked" />
+
+                <Spinner
+                    android:id="@+id/storeCategory"
+                    style="@style/Font_family_light"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/margin_right_16"
+                    android:layout_marginTop="@dimen/margin_top_8"
+                    android:layout_marginRight="@dimen/margin_right_16"
+                    android:layout_marginBottom="@dimen/margin_top_8"
+                    android:background="@drawable/edit_style"
+                    android:drawablePadding="@dimen/padding_16"
+                    android:gravity="center"
+                    android:padding="@dimen/padding_16"
+                    android:prompt="@string/select_category"
+                    android:spinnerMode="dialog" />
+
+                <EditText
+                    android:id="@+id/name"
+                    style="@style/Font_family_light"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_right_16"
+                    android:layout_marginTop="@dimen/margin_top_8"
+                    android:layout_marginRight="@dimen/margin_right_16"
+                    android:layout_marginBottom="@dimen/margin_top_8"
+                    android:background="@drawable/edit_style"
+                    android:drawablePadding="@dimen/padding_16"
+                    android:hint="Name"
+                    android:inputType="text"
+                    android:maxLength="30"
+                    android:maxLines="1"
+                    android:padding="@dimen/padding_16"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
+                    android:textSize="@dimen/text_20" />
+
+                <TextView
+                    android:id="@+id/openTime"
+                    style="@style/Font_family_light"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_right_16"
+                    android:layout_marginTop="@dimen/margin_top_8"
+                    android:layout_marginRight="@dimen/margin_right_16"
+                    android:layout_marginBottom="@dimen/margin_top_8"
+                    android:background="@drawable/edit_style"
+                    android:drawablePadding="@dimen/padding_16"
+                    android:hint="Opening At"
+                    android:maxLines="1"
+                    android:padding="@dimen/padding_16"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
+                    android:textSize="@dimen/text_20" />
+
+                <TextView
+                    android:id="@+id/closeTime"
+                    style="@style/Font_family_light"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_right_16"
+                    android:layout_marginTop="@dimen/margin_top_8"
+                    android:layout_marginRight="@dimen/margin_right_16"
+                    android:layout_marginBottom="@dimen/margin_top_8"
+                    android:background="@drawable/edit_style"
+                    android:drawablePadding="@dimen/padding_16"
+                    android:hint="Closing At"
+                    android:maxLines="1"
+                    android:padding="@dimen/padding_16"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
+                    android:textSize="@dimen/text_20" />
+
+                <EditText
+                    android:id="@+id/description"
+                    style="@style/Font_family_light"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_right_16"
+                    android:layout_marginTop="@dimen/margin_top_8"
+                    android:layout_marginRight="@dimen/margin_right_16"
+                    android:layout_marginBottom="@dimen/margin_top_8"
+                    android:background="@drawable/edit_style"
+                    android:drawablePadding="@dimen/padding_16"
+                    android:hint="Description"
+                    android:inputType="textMultiLine"
+                    android:lines="2"
+                    android:padding="@dimen/padding_16"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
+                    android:textSize="@dimen/text_20" />
 
 
-        <android.support.v7.widget.CardView
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            app:cardBackgroundColor="@color/bg_gray"
-            app:cardCornerRadius="5dp"
-            app:cardElevation="3dp">
-
-            <Spinner
-                android:id="@+id/storeCategory"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:prompt="@string/select_category"
-                android:spinnerMode="dialog" />
-
-        </android.support.v7.widget.CardView>
+                <Button
+                    android:id="@+id/addStore_btn"
+                    style="@style/Font_family_regular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_right_16"
+                    android:layout_marginTop="@dimen/margin_top_8"
+                    android:layout_marginRight="@dimen/margin_right_16"
+                    android:layout_marginBottom="@dimen/margin_top_8"
+                    android:background="@drawable/red_style"
+                    android:text="Add Store"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_20" />
 
 
-        <android.support.v7.widget.CardView
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            app:cardBackgroundColor="@color/bg_gray"
-            app:cardCornerRadius="5dp"
-            app:cardElevation="3dp">
+            </LinearLayout>
 
-            <EditText
-                android:id="@+id/name"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_margin="3dp"
-                android:background="@color/bg_gray"
-                android:gravity="center|start"
-                android:hint="Name"
-                android:inputType="text"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-        </android.support.v7.widget.CardView>
+        </ScrollView>
 
-        <android.support.v7.widget.CardView
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            app:cardBackgroundColor="@color/bg_gray"
-            app:cardCornerRadius="5dp"
-            app:cardElevation="3dp">
+    </RelativeLayout>
 
-            <TextView
-                android:id="@+id/openTime"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_margin="3dp"
-                android:background="@color/bg_gray"
-                android:gravity="center|start"
-                android:hint="Opening At"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            app:cardBackgroundColor="@color/bg_gray"
-            app:cardCornerRadius="5dp"
-            app:cardElevation="3dp">
-
-            <TextView
-                android:id="@+id/closeTime"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_margin="3dp"
-                android:background="@color/bg_gray"
-                android:gravity="center|start"
-                android:hint="Closing At"
-                android:inputType="text"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            app:cardBackgroundColor="@color/bg_gray"
-            app:cardCornerRadius="5dp"
-            app:cardElevation="3dp">
-
-            <EditText
-                android:id="@+id/description"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_margin="3dp"
-                android:background="@color/bg_gray"
-                android:gravity="center|start"
-                android:hint="Description"
-                android:inputType="text"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:lines="3"/>
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:id="@+id/addStore_btn"
-            android:layout_width="80dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="20dp"
-            app:cardBackgroundColor="@color/colorPrimary"
-            app:cardCornerRadius="10dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="Add"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
-        </android.support.v7.widget.CardView>
-    </LinearLayout>
-
-</android.support.v4.widget.NestedScrollView>
+</android.support.constraint.ConstraintLayout>

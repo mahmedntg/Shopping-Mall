@@ -25,11 +25,15 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseDatabase firebaseDatabase;
     private FirebaseAuth firebaseAuth;
     private AlertDialog alertDialog;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading...");
+        progressDialog.setCancelable(false);
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
@@ -64,6 +68,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void login(String email, String pass) {
+        progressDialog.show();
         firebaseAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -72,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
                     firebaseDatabase.getReference("users").child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-
+                            progressDialog.hide();
                             startActivity(new Intent(LoginActivity.this, StoreActivity
 
                                     .class));
@@ -80,11 +85,12 @@ public class LoginActivity extends AppCompatActivity {
 
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
-
+                            progressDialog.hide();
                         }
                     });
 
                 } else {
+                    progressDialog.hide();
                     alertDialog.setMessage(task.getException().getMessage());
                     alertDialog.show();
                 }
@@ -96,6 +102,14 @@ public class LoginActivity extends AppCompatActivity {
 
     private void navigateToRegisterAC() {
         startActivity(new Intent(this, RegisterActivity.class));
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.cancel();
+        }
     }
 
 }

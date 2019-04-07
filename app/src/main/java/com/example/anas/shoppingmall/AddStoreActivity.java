@@ -17,7 +17,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.example.anas.shoppingmall.utils.Store;
+import com.example.anas.shoppingmall.utillity.Store;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -33,7 +33,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class AddStoreActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
+public class AddStoreActivity extends BaseActivity implements TimePickerDialog.OnTimeSetListener {
     private ImageButton imageBtn;
     private EditText nameET, descriptionET;
     private TextView openTimeTV, closeTimeTV;
@@ -106,7 +106,7 @@ public class AddStoreActivity extends AppCompatActivity implements TimePickerDia
         });
 
         final ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, list);
+                R.layout.spinner_item, list);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categorySpinner.setAdapter(dataAdapter);
         categoryRef.addValueEventListener(new ValueEventListener() {
@@ -178,4 +178,12 @@ public class AddStoreActivity extends AppCompatActivity implements TimePickerDia
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
     }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.cancel();
+        }
+    }
+
 }
