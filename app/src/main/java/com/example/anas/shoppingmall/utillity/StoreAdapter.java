@@ -80,13 +80,13 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.StoreViewHol
         public void setOpenTime(String openTime) {
             TextView textView = (TextView) mView.findViewById(R.id.openTime);
             textView.setOnClickListener(this);
-            textView.setText("Opening: " + openTime);
+            textView.setText("Open: " + openTime);
         }
 
         public void setCloseTime(String closeTime) {
             TextView textView = (TextView) mView.findViewById(R.id.closeTime);
             textView.setOnClickListener(this);
-            textView.setText("Closing: " + closeTime);
+            textView.setText("Close: " + closeTime);
         }
 
 
